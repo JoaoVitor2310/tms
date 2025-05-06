@@ -32,9 +32,9 @@
 
 <body>
     <div id="app" class="d-flex flex-column">
-        {{-- @if(Auth::check())
+        @if(Auth::check())
         @include('layouts.header')
-        @endif --}}
+        @endif
         <main class="d-flex flex-fill flex-column justify-content-between">
             @yield('content')
         </main>
