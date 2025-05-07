@@ -10,13 +10,13 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-.tms-bg {
+.btn-tms {
     background-color: #EB4B52;
     color: white;
     transition: all 0.3s ease;
 }
 
-.tms-bg:hover {
+.btn-tms:hover {
     background-color: white;
     color: #EB4B52;
     border: 1px solid #EB4B52;
