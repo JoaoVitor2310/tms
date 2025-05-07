@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Anotacao extends Model
 {
-    protected $fillable = ['titulo', 'texto', 'categoria_id'];
+    protected $table = 'anotacoes';
+
+    protected $fillable = ['titulo', 'texto', 'categoria_id', 'user_id'];
 
     public function categoria()
     {
