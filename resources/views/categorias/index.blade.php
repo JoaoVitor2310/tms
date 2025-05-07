@@ -7,14 +7,15 @@
             <div class="d-flex flex-column align-items-start mb-3">
                 <p>Altere as informações das categorias do sistema.</p>
                 <!-- Botão Criar Novo Usuário -->
-                <a href="{{ route('categorias.create') }}" class="btn btn-primary"><i class="bi bi-person-plus me-1"></i> Nova categoria</a>
+                <a href="{{ route('categorias.create') }}" class="btn btn-tms"><i class="bi bi-person-plus me-1"></i>
+                    Nova categoria</a>
             </div>
 
             <x-feedback-message />
 
             <!-- Tabela de Categorias -->
             <div class="table-responsive">
-                <table class="table">
+                <table class="table table-hover align-middle text-center">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -25,16 +26,16 @@
                     <tbody>
                         @foreach ($categorias as $categoria)
                             <tr>
-                                <td>{{ $categoria['id'] }}</td>
-                                <td>{{ $categoria['nome'] }}</td>
+                                <td>{{ $categoria->id }}</td>
+                                <td>{{ $categoria->nome }}</td>
                                 <td>
-                                    <a href="{{ route('categorias.edit', $categoria['id']) }}" class="edit-btn btn-sm" title="Editar"><i
-                                            class="bi bi-pen"></i></a>
+                                    <a href="{{ route('categorias.edit', $categoria['id']) }}" class="btn btn-outline-secondary"
+                                        title="Editar"><i class="bi bi-pen"></i></a>
                                     <form action="{{ route('categorias.destroy', $categoria['id']) }}" method="POST"
                                         style="display:inline-block;" class="delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="delete-btn btn-sm" title="Deletar"><i
+                                        <button type="submit" class="btn btn-outline-danger" title="Deletar"><i
                                                 class="bi bi-trash"></i>
                                         </button>
                                     </form>
@@ -47,27 +48,27 @@
         </div>
     </div>
 
-    <script>
-        // SweetAlert de confirmação de exclusão
-        document.querySelectorAll('.delete-form').forEach(form => {
-            form.addEventListener('submit', function (event) {
-                event.preventDefault(); // Impede o envio imediato do formulário
-
-                Swal.fire({
-                    title: 'Deseja realmente excluir a categoria?',
-                    text: "Você não poderá reverter esta ação.",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Sim, excluir!',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Envia o formulário se o usuário confirmar
-                        form.submit();
-                    }
-                });
-            });
-        });
-    </script>
 
 @endsection
+<script>
+    // SweetAlert de confirmação de exclusão
+    document.querySelectorAll('.delete-form').forEach(form => {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Impede o envio imediato do formulário
+
+            Swal.fire({
+                title: 'Deseja realmente excluir a categoria?',
+                text: "Você não poderá reverter esta ação.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sim, excluir!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Envia o formulário se o usuário confirmar
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
