@@ -15,7 +15,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::all()->toArray();
+        $categorias = Categoria::with('user')->where('user_id', Auth::id())->get();
         return view('categorias.index', compact('categorias'));
     }
 
