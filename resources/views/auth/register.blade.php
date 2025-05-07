@@ -46,7 +46,7 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="btn tms-bg w-100 py-2">Cadastrar</button>
+                <button type="submit" class="btn btn-tms w-100 py-2">Cadastrar</button>
             </form>
         </div>
     </div>

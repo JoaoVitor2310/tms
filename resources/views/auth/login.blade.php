@@ -36,7 +36,7 @@
                         <div>{{ session('error_message') }}</div>
                     </div>
                 @endif
-                <button type="submit" class="btn tms-bg w-100 py-2">Entrar</button>
+                <button type="submit" class="btn btn-tms w-100 py-2">Entrar</button>
             </form>
         </div>
     </div>
