@@ -14,10 +14,36 @@ class AnotacaoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $anotacoes = Anotacao::with('categoria', 'user')->where('user_id', Auth::id())->get();
-        return view('anotacoes.index', compact('anotacoes'));
+        $anotacoes = Anotacao::with('categoria')
+            ->where('user_id', Auth::id())
+            ->when($request->titulo, function ($query, $titulo) {
+                $query->where(function ($query) use ($titulo) {
+                    $query->where('titulo', 'like', "%{$titulo}%")
+                        ->orWhere('texto', 'like', "%{$titulo}%"); // Busca no título ou texto
+                });
+            })
+            ->when($request->filled('categoria'), function ($query) use ($request) {
+                if ($request->categoria === 'null') {
+                    $query->whereNull('categoria_id');
+                } else {
+                    $query->where('categoria_id', $request->categoria);
+                }
+            })
+            ->when($request->data_inicial, function ($query, $dataInicial) {
+                $query->whereDate('created_at', '>=', $dataInicial);
+            })
+            ->when($request->data_final, function ($query, $dataFinal) {
+                $query->whereDate('created_at', '<=', $dataFinal);
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
+
+        $categorias = Categoria::with('user')->where('user_id', Auth::id())->get();
+        return view('anotacoes.index', compact('anotacoes', 'categorias'));
     }
 
     /**
@@ -57,7 +83,7 @@ class AnotacaoController extends Controller
             return back()
                 ->withInput()
                 ->with('error_message', 'Ocorreu um erro ao criar a anotação. Tente novamente.');
-                // ->with('error_message', $e->getMessage());
+            // ->with('error_message', $e->getMessage());
         }
     }
 
