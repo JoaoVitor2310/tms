@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-md mt-3">
         <div class="card shadow-sm p-4 main">
-            <h1><i class="bi bi-tags text-primary"></i>
+            <h1><i class="bi bi-tags text-danger"></i>
                 @if(isset($categoria))
                     Editar Categoria
                 @else
