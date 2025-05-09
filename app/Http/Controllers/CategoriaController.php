@@ -13,9 +13,23 @@ class CategoriaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categorias = Categoria::with('user')->where('user_id', Auth::id())->get();
+        $categorias = Categoria::with('user')
+            ->where('user_id', Auth::id())
+            ->when($request->nome, function ($query, $nome) {
+                $query->where('nome', 'like', "%{$nome}%");
+            })
+            ->when($request->data_inicial, function ($query, $dataInicial) {
+                $query->whereDate('created_at', '>=', $dataInicial);
+            })
+            ->when($request->data_final, function ($query, $dataFinal) {
+                $query->whereDate('created_at', '<=', $dataFinal);
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
         return view('categorias.index', compact('categorias'));
     }
 
