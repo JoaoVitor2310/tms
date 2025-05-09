@@ -2,19 +2,19 @@
 @section('content')
     <div class="container-md mt-3">
         <div class="card shadow-sm p-4 main">
-            <h1><i class="bi bi-file-text text-primary"></i>
+            <h1><i class="bi bi-file-text text-danger"></i>
                 @if(isset($anotacao))
-                    Editar Anotacao
+                    Editar Anotação
                 @else
-                    Cadastro de Anotacao
+                    Cadastro de Anotação
                 @endif
             </h1>
 
             <p>
                 @if(isset($anotacao))
-                    Altere as informações da anotacao.
+                    Altere as informações da anotação.
                 @else
-                    Informe o nome da nova anotacao.
+                    Informe o nome da nova anotação.
                 @endif
             </p>
 
@@ -28,7 +28,7 @@
                 @endif
 
                 <div class="mb-3">
-                    <label for="titulo" class="form-label fw-bold">Título</label>
+                    <label for="titulo" class="form-label fw-bold">Título <span class="text-danger">*</span></label>
                     <input id="titulo" type="text" class="form-control @error('titulo') is-invalid @enderror" name="titulo"
                         value="{{ old('titulo', $anotacao->titulo ?? '') }}" required
                         placeholder="Ex: Compra no mercado, Reunião do trabalho...">
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="texto" class="form-label fw-bold">Texto</label>
+                    <label for="texto" class="form-label fw-bold">Texto <span class="text-danger">*</span></label>
                     <textarea id="texto" class="form-control @error('texto') is-invalid @enderror" name="texto" rows="5"
                         required
                         placeholder="Escreva aqui o conteúdo da anotação...">{{ old('texto', $anotacao->texto ?? '') }}</textarea>
