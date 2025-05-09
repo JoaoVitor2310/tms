@@ -29,13 +29,7 @@
                 </div>
 
                 <p>Não possui uma conta? <a href="{{ route('registerForm') }}">Cadastre-se</a></p>
-                @if (session('error_message'))
-                    <div class="alert alert-danger d-flex align-items-center gap-2 p-3 rounded-3 shadow-sm fade show"
-                        role="alert" id="error_message">
-                        <i class="bi bi-exclamation-triangle-fill"></i>
-                        <div>{{ session('error_message') }}</div>
-                    </div>
-                @endif
+                <x-feedback-message />
                 <button type="submit" class="btn btn-tms w-100 py-2">Entrar</button>
             </form>
         </div>
