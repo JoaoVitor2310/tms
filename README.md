@@ -23,7 +23,7 @@ Copie o arquivo .env.example para um novo arquivo .env:
 
 cp .env.example .env
 
-Edite o arquivo .env e configure as variáveis de ambiente, utilizando o docker-compose, fica:
+Edite o arquivo .env e configure as variáveis de ambiente, utilizando o docker-compose, fica(com as variáveis desse composer):
 
 DB_CONNECTION=mysql
 DB_HOST=db
@@ -39,8 +39,10 @@ No diretório raiz do projeto, execute o seguinte comando para construir os cont
 
 docker-compose up --build -d
 
-Isso criará os contêineres para PHP-FPM, Nginx e MySQL. O parâmetro -d faz com que o Docker Compose execute os contêineres em segundo plano.
 
-7.  Acessar o aplicativo
+Isso criará os contêineres para PHP-FPM, Nginx e MySQL. O parâmetro -d faz com que o Docker Compose execute os contêineres em segundo plano, se quiser ver os logs, não utilize o -d. 
+
+7.  Acessar o projeto
     
-Após todas as etapas acima, o projeto Laravel estará rodando em http://localhost:8000. Você pode acessar o aplicativo no seu navegador e verificar se tudo está funcionando.
+Após todas as etapas acima, aguarde alguns segundos até o projeto se estabelecer completamente(é comun aparecer o erro 502 do nginx, isso ocorre por que o nginx fica pronto mais rápido do que o laravel, espere mais um pouco) e estará rodando em http://localhost:8000. Você pode acessar no seu navegador e verificar se tudo está funcionando.
+
